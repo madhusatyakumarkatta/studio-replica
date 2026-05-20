@@ -1,0 +1,212 @@
+nav{
+    padding: 2vw 3vw;
+}
+#nav-part2{
+    gap: 30px;
+}
+#nav-part2 h3:hover{
+    color: #fe320a;
+}
+
+#all-hero {
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    padding: 3vw;
+}
+
+#all-hero h1 {
+    font-size: 14vw;
+    line-height: 12vw;
+    font-weight: 500;
+    letter-spacing: -0.6vw;
+}
+
+#all-hero h1 span {
+    color: #fe320a; /* Sundown Orange */
+}
+
+#all-list {
+    width: 100%;
+    padding: 2vw;
+}
+
+.all-elem {
+    height: 80vh; /* Har element bada hoga taaki scroll lamba ho */
+    width: 100%;
+    margin-bottom: 5vw;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.all-elem img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    filter: grayscale(100%); /* B&W effect jo hover par color hoga */
+    transition: all ease 0.6s;
+}
+
+.all-elem:hover img {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+}
+
+.all-text {
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+    color: #fff;
+    z-index: 10;
+}
+
+.all-text h2 {
+    font-size: 6vw;
+    line-height: 5vw;
+}
+
+.all-text h4 {
+    font-size: 1.2vw;
+    font-weight: 400;
+    margin-top: 10px;
+    opacity: 0.8;
+}
+
+/* Gradient overlay taaki text dikhe */
+.all-elem::after {
+    content: "";
+    position: absolute;
+    height: 40%;
+    width: 100%;
+    bottom: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+}
+
+/* All Footer Section */
+#all-footer {
+    width: 100%;
+    min-height: 80vh;
+    background-color: #fe320a; /* Signature Sundown Orange */
+    color: #fff;
+    padding: 5vw 3vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 10vw; /* Cards se gap */
+}
+
+/* Moving Marquee Animation */
+#footer-marquee {
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 5vw 0;
+    border-bottom: 1px solid #ffffff40;
+}
+
+#footer-marquee h1 {
+    font-size: 12vw;
+    display: inline-block;
+    animation: marquee-anim 15s linear infinite;
+}
+
+#footer-marquee h1 span {
+    -webkit-text-stroke: 1px #fff;
+    color: transparent;
+}
+
+@keyframes marquee-anim {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+}
+
+/* Footer Bottom Layout */
+#footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 5vw;
+}
+
+.f-left h2 {
+    font-size: 6vw;
+    line-height: 5.5vw;
+    font-weight: 500;
+}
+
+#work-link {
+    margin-top: 3vw;
+}
+
+#work-link a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.5vw;
+    border: 1px solid #fff;
+    padding: 1vw 2.5vw;
+    border-radius: 50px;
+    transition: all 0.3s;
+}
+
+#work-link a:hover {
+    background-color: #fff;
+    color: #fe320a;
+}
+
+.f-right {
+    text-align: right;
+}
+
+.socials {
+    margin-top: 1vw;
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+}
+
+.socials a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1vw;
+    opacity: 0.7;
+}
+
+.socials a:hover { opacity: 1; 
+}
+
+
+
+@media (max-width: 600px) {
+
+    #work-link a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.9vw;
+    border: 1px solid #fff;
+    padding: 1vw 2.5vw;
+    border-radius: 50px;
+    transition: all 0.3s;
+}
+.socials a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 2.3vw;
+    opacity: 0.8;
+}
+#all-hero {
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    padding: 6vw;
+}
+.all-text h4 {
+    font-size: 1.8vw;
+    font-weight: 400;
+    margin-top: 10px;
+    opacity: 0.8;
+}
+
+
+}
