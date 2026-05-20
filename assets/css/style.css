@@ -1,16 +1,16 @@
 @font-face {
     font-family: neu;
-    src: url(./NHaasGroteskTXPro-55Rg.ttf);
+    src: url(../fonts/NHaasGroteskTXPro-55Rg.ttf);
 }
 @font-face {
     font-family: neu;
     font-weight: 100;
-    src: url(./NHaasGroteskTXPro-65Md.ttf);
+    src: url(../fonts/NHaasGroteskTXPro-65Md.ttf);
 }
 @font-face {
     font-family: neu;
     font-weight: 200;
-    src: url(./NHaasGroteskTXPro-75Bd.ttf);
+    src: url(../fonts/NHaasGroteskTXPro-75Bd.ttf);
 }
 *{
     padding: 0;
