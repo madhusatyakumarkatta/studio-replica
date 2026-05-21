@@ -98,5 +98,4 @@ Then visit [http://localhost:8000](http://localhost:8000).
 ## 🎨 Credits & Design System
 
 - **Design Reference**: Sundown Studio
-- **Developer**: PK Yadav
 - All animations and custom transitions have been recreated to replicate the look and feel of the original site's premium layout.
