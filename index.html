@@ -4,21 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sundown Studio</title>
+
+    <!-- Favicon: the small icon shown in the browser tab -->
     <link rel="shortcut icon" href="assets/images/icon.png" type="image/x-icon">
+
+    <!-- Lenis CSS: adds styles needed by the smooth-scroll library -->
     <link rel="stylesheet" href="https://unpkg.com/lenis@latest/dist/lenis.css">
+
+    <!-- Swiper CSS: styles for the touch-draggable brand slider in Page 4 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+    <!-- Our custom styles for the whole page -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+
+    <!-- ══════════════════════════════════════════════════════════
+         LOADER SCREEN
+         This black fullscreen overlay appears when the page first
+         loads. It cycles three words (ENVIRONMENTS → EXPERIENCES
+         → CONTENT) one by one using CSS animations, then slides
+         off-screen after 4 seconds (controlled in studio.js).
+    ══════════════════════════════════════════════════════════ -->
     <div id="loader">
-        <h1>ENVIRONMENTS</h1>
-        <h1>EXPERIENCES</h1>
-        <h1>CONTENT</h1>  
+        <h1>ENVIRONMENTS</h1>  <!-- Shows first (animation-delay: 1s) -->
+        <h1>EXPERIENCES</h1>   <!-- Shows second (animation-delay: 2s) -->
+        <h1>CONTENT</h1>       <!-- Shows third (animation-delay: 3s) -->
     </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         FLOATING PROJECT PREVIEW IMAGE
+         This invisible box follows your cursor across the
+         Featured Projects list (Page 3). When you hover over a
+         project row, its preview image appears here.
+         Controlled entirely in studio.js (page4Animation function).
+    ══════════════════════════════════════════════════════════ -->
     <div id="fixed-image"></div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         MAIN PAGE WRAPPER
+         All page sections live inside here. The footer sits
+         OUTSIDE this div and is fixed to the bottom of the screen,
+         creating the "scroll to reveal footer" effect.
+    ══════════════════════════════════════════════════════════ -->
     <div id="main">
+
+        <!-- ────────────────────────────────────────────────────
+             FULL-SCREEN MENU OVERLAY
+             This dark panel is hidden above the screen (top:-100%).
+             Clicking the "Menu" button slides it DOWN over the page.
+             Contains navigation links and a gooey animated background.
+        ──────────────────────────────────────────────────────── -->
         <div id="full-scr">
+            <!-- Animated glowing orange blob visible in the menu (mobile only) -->
             <div id="gooey"></div>
+
+            <!-- The navigation links shown inside the menu overlay -->
             <div id="full-div1">
                 <h2><a href="work.html">Work</a></h2>
                 <h2><a href="studio.html">Studio</a></h2>
@@ -26,113 +67,172 @@
                 <h2><a href="index.html">Back</a></h2>
             </div>
         </div>
+
+        <!-- ════════════════════════════════════════════════════
+             PAGE 1 — HERO SECTION
+             The very first thing the visitor sees.
+             Contains: navigation bar, headline text, and a video.
+        ════════════════════════════════════════════════════ -->
         <div id="page1">
+
+            <!-- ── NAV BAR ────────────────────────────────── -->
             <nav>
+                <!-- Sundown Studio logo (links to homepage) -->
                 <img src="https://assets-global.website-files.com/64d3dd9edfb41666c35b15b7/64d3dd9edfb41666c35b15c2_Sundown%20logo.svg" alt="Sundown Studio logo">
+
+                <!-- Desktop navigation links (hidden on mobile via CSS) -->
                 <div id="nav-part2">
                     <h4><a href="work.html">Work</a></h4>
                     <h4><a href="studio.html">Studio</a></h4>
                     <h4><a href="contact.html">Contact</a></h4>
                 </div>
+
+                <!-- Mobile "Menu" button (only shows on small screens via CSS) -->
                 <div id="menu">
                     <h4>Menu</h4>
                 </div>
             </nav>
+
+            <!-- ── HERO HEADLINE AREA ─────────────────────── -->
+            <!-- This section sits at the bottom of the hero with
+                 a tagline on the left and big bold text on the right -->
             <div id="center">
+                <!-- Left side: short studio description -->
                 <div id="left">
                     <h3>Sundown is a multi-disciplinary studio focused on creating unique, end-to-end experiences and environments.</h3>
                 </div>
+
+                <!-- Right side: large headline that defines the brand -->
                 <div id="right">
                     <h1>SPACES <br>
                         THAT<br>
                          INSPIRE</h1>
                 </div>
             </div>
+
+            <!-- ── GOOEY ANIMATED BLOB (Desktop) ─────────── -->
+            <!-- Three overlapping orange blurred circles that
+                 animate independently, creating a lava-lamp/gooey
+                 glowing effect behind the hero video -->
             <div id="hero-shape">
-                <div id="hero1"></div>
-                <div id="hero2"></div>
-                <div id="hero3"></div>
-
+                <div id="hero1"></div>  <!-- Main orange fill — static -->
+                <div id="hero2"></div>  <!-- Smaller circle that drifts with anime2 keyframe -->
+                <div id="hero3"></div>  <!-- Smaller circle that drifts with anime1 keyframe -->
             </div>
-            <video autoplay loop muted src="assets/videos/video.mp4"></video> 
 
-        </div>
+            <!-- ── HERO VIDEO ─────────────────────────────── -->
+            <!-- Autoplays silently on loop to give the page life.
+                 muted is required for autoplay to work in browsers. -->
+            <video autoplay loop muted src="assets/videos/video.mp4"></video>
+
+        </div><!-- end #page1 -->
+
+
+        <!-- ════════════════════════════════════════════════════
+             PAGE 2 — SCROLLING MARQUEE + ABOUT SECTION
+             Two sub-sections:
+               1. Infinite horizontal scrolling text banner
+               2. Mission statement + team image
+        ════════════════════════════════════════════════════ -->
         <div id="page2">
+
+            <!-- ── INFINITE SCROLLING TEXT BANNER ────────── -->
+            <!-- Three identical sets of text (.con divs) scroll
+                 from right to left continuously using a CSS @keyframes
+                 animation called "move". Having 3 copies ensures the
+                 text fills the screen seamlessly with no gaps. -->
             <div id="move-text">
+
+                <!-- First copy of the scrolling text strip -->
+                <div class="con">
+                    <h1>EXPERIENCES</h1>
+                    <div id="gola"></div>  <!-- Small orange bullet/dot between words -->
+                    <h1>CONTENT</h1>
+                    <div id="gola"></div>
+                    <h1>ENVIRONMENTS</h1>
+                    <div id="gola"></div>
+                </div>
+
+                <!-- Second copy (seamlessly loops when first copy exits) -->
                 <div class="con">
                     <h1>EXPERIENCES</h1>
                     <div id="gola"></div>
-
                     <h1>CONTENT</h1>
-                     <div id="gola"></div>
-
+                    <div id="gola"></div>
                     <h1>ENVIRONMENTS</h1>
-                     <div id="gola"></div>
-
+                    <div id="gola"></div>
                 </div>
 
+                <!-- Third copy for extra-wide screens -->
                 <div class="con">
                     <h1>EXPERIENCES</h1>
-                     <div id="gola"></div>
-
+                    <div id="gola"></div>
                     <h1>CONTENT</h1>
-                     <div id="gola"></div>
-
+                    <div id="gola"></div>
                     <h1>ENVIRONMENTS</h1>
-                     <div id="gola"></div>
-
-                </div>
-
-                <div class="con">
-                    <h1>EXPERIENCES</h1>
-                     <div id="gola"></div>
-
-                    <h1>CONTENT</h1>
-                     <div id="gola"></div>
-
-                    <h1>ENVIRONMENTS</h1>
-                     <div id="gola"></div>
-
+                    <div id="gola"></div>
                 </div>
             </div>
+
+            <!-- ── ABOUT / MISSION STATEMENT ─────────────── -->
             <div id="page2-bottom">
+                <!-- Large quote-style mission statement -->
                 <h1>We are a group of design-<br>driven, goal-focused creators,<br>
-                     producers, and designers who<br> believe
-                      that the details make<br> all
+                     producers, and designers who<br>believe
+                      that the details make<br>all
                        the difference.</h1>
-                       <div id="bottom-part2">
-                        <img src="assets/images/image.webp" alt="Sundown Studio team">
-                        <p>We love to create, we love to solve,
-                             we love to collaborate, and we love to turn amazing ideas into reality. 
-                             We're here to partner with you through every step of the process and know that relationships
-                              are the most important things we build.</p>
-                       </div>
-                       <div id="big-gola">
-                        
-                       </div>
+
+                <!-- Right column: team image + descriptive paragraph -->
+                <div id="bottom-part2">
+                    <img src="assets/images/image.webp" alt="Sundown Studio team">
+                    <p>We love to create, we love to solve,
+                         we love to collaborate, and we love to turn amazing ideas into reality.
+                         We're here to partner with you through every step of the process and know that relationships
+                          are the most important things we build.</p>
+                </div>
+
+                <!-- Animated orange glow blob in the background of this section -->
+                <div id="big-gola"></div>
             </div>
 
-        </div>
+        </div><!-- end #page2 -->
+
+
+        <!-- ════════════════════════════════════════════════════
+             PAGE 3 — FEATURED PROJECTS LIST
+             A vertical list of project cards. Hovering over
+             any row shows a floating preview image (via studio.js).
+             Each .elem has a `data-image` attribute with its
+             project's preview image URL.
+        ════════════════════════════════════════════════════ -->
         <div id="page3">
 
+            <!-- Section label with a tiny orange dot indicator -->
             <div id="sec">
-                <div id="gol"></div>
+                <div id="gol"></div>  <!-- Small orange circle bullet -->
                 <p>FEATURED PROJECTS</p>
             </div>
+
+            <!-- Container for all project rows (mouse events are attached to this in JS) -->
             <div id="elem-container">
-                <div  id="elem1"  class="elem" data-image="https://assets-global.website-files.com/64d3dd9edfb41666c35b15d4/64d3dd9edfb41666c35b169f_Copy%2520of%2520211023_NikeCHI_PlayNewKids_Beauty-03-p-1600.webp">
-                <div id="overlay"></div>
-                <div id="proj">
-                    <h2>Play New Kidvision</h2>
+
+                <!-- ── PROJECT ROW 1 ── -->
+                <div id="elem1" class="elem" data-image="https://assets-global.website-files.com/64d3dd9edfb41666c35b15d4/64d3dd9edfb41666c35b169f_Copy%2520of%2520211023_NikeCHI_PlayNewKids_Beauty-03-p-1600.webp">
+                    <!-- Orange hover fill that slides up from below (controlled by CSS) -->
+                    <div id="overlay"></div>
+                    <!-- Project name and client details -->
+                    <div id="proj">
+                        <h2>Play New Kidvision</h2>
                         <div>
                             <h4>NIKE</h4>
                             <p>Environment</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="elem" data-image="https://assets-global.website-files.com/64d3dd9edfb41666c35b15d4/64d3dd9edfb41666c35b163b_Copy-of-IMG_1180.webp">
-            <div id="overlay"></div>
+                <!-- ── PROJECT ROW 2 ── -->
+                <div class="elem" data-image="https://assets-global.website-files.com/64d3dd9edfb41666c35b15d4/64d3dd9edfb41666c35b163b_Copy-of-IMG_1180.webp">
+                    <div id="overlay"></div>
                     <div id="proj">
                         <h2>SOHO NYC</h2>
                         <div>
@@ -140,9 +240,10 @@
                             <p>Environment</p>
                         </div>
                     </div>
-                </div> 
+                </div>
 
-        <div class="elem" data-image="https://assets-global.website-files.com/64d3dd9edfb41666c35b15d4/64d3dd9edfb41666c35b1733_Nike_HOI_50th_SU22_FL1_5388.webp">
+                <!-- ── PROJECT ROW 3 ── -->
+                <div class="elem" data-image="https://assets-global.website-files.com/64d3dd9edfb41666c35b15d4/64d3dd9edfb41666c35b1733_Nike_HOI_50th_SU22_FL1_5388.webp">
                     <div id="overlay"></div>
                     <div id="proj">
                         <h2>Makers Studio HOI</h2>
@@ -151,9 +252,10 @@
                             <p>Experiencal</p>
                         </div>
                     </div>
-                 </div>
+                </div>
 
-        <div class="elem" data-image="https://assets-global.website-files.com/64d3dd9edfb41666c35b15d4/64d3dd9edfb41666c35b1733_Nike_HOI_50th_SU22_FL1_5388.webp">
+                <!-- ── PROJECT ROW 4 ── -->
+                <div class="elem" data-image="https://assets-global.website-files.com/64d3dd9edfb41666c35b15d4/64d3dd9edfb41666c35b1733_Nike_HOI_50th_SU22_FL1_5388.webp">
                     <div id="overlay"></div>
                     <div id="proj">
                         <h2>SOHO 2023</h2>
@@ -162,9 +264,10 @@
                             <p>Environment</p>
                         </div>
                     </div>
-                 </div>
+                </div>
 
-        <div class="elem" data-image="https://assets-global.website-files.com/64d3dd9edfb41666c35b15d4/64d3dd9edfb41666c35b1712_AM704009-p-1600.webp">
+                <!-- ── PROJECT ROW 5 ── -->
+                <div class="elem" data-image="https://assets-global.website-files.com/64d3dd9edfb41666c35b15d4/64d3dd9edfb41666c35b1712_AM704009-p-1600.webp">
                     <div id="overlay"></div>
                     <div id="proj">
                         <h2>NYFW Popup</h2>
@@ -175,8 +278,9 @@
                     </div>
                 </div>
 
-        <div class="elem" data-image="https://assets-global.website-files.com/64d3dd9edfb41666c35b15d4/64d3dd9edfb41666c35b16c5_Copy%20of%20Nike_Soho_AMD21_0781_LORES.webp">
-                     <div id="overlay"></div>
+                <!-- ── PROJECT ROW 6 ── -->
+                <div class="elem" data-image="https://assets-global.website-files.com/64d3dd9edfb41666c35b15d4/64d3dd9edfb41666c35b16c5_Copy%20of%20Nike_Soho_AMD21_0781_LORES.webp">
+                    <div id="overlay"></div>
                     <div id="proj">
                         <h2>Air Force 1 2021</h2>
                         <div>
@@ -184,9 +288,10 @@
                             <p>Environment</p>
                         </div>
                     </div>
-                 </div>
+                </div>
 
-        <div class="elem" data-image="https://assets-global.website-files.com/64d3dd9edfb41666c35b15d4/64d3dd9edfb41666c35b16f4_Copy%20of%20Nike_Soho_50th_SU22_FL1_6176.webp">
+                <!-- ── PROJECT ROW 7 ── -->
+                <div class="elem" data-image="https://assets-global.website-files.com/64d3dd9edfb41666c35b15d4/64d3dd9edfb41666c35b16f4_Copy%20of%20Nike_Soho_50th_SU22_FL1_6176.webp">
                     <div id="overlay"></div>
                     <div id="proj">
                         <h2>50th Anniversary</h2>
@@ -195,73 +300,137 @@
                             <p>Environment</p>
                         </div>
                     </div>
-                 </div>
-            </div>
-                 <div id="but">
+                </div>
+
+            </div><!-- end #elem-container -->
+
+            <!-- "All Projects" button -->
+            <div id="but">
                 <div id="navbut">
                     <h4><a href="all.html">All Projects -></a></h4>
                 </div>
             </div>
-        </div>
+
+        </div><!-- end #page3 -->
+
+
+        <!-- ════════════════════════════════════════════════════
+             PAGE 4 — SERVICES + CLIENT SLIDER
+             Two sub-sections:
+               1. Black box with tabbed service descriptions
+               2. Horizontal drag-slider of client logos + blurbs
+        ════════════════════════════════════════════════════ -->
         <div id="page4">
+
+            <!-- ── SERVICES BLACK BOX ─────────────────────── -->
+            <!-- Dark rounded panel with clickable service tabs on
+                 the left and a real project image on the right -->
             <div id="black-box">
+
                 <div id="tab-sec">
+                    <!-- Service tabs — each has a data-img for swapping the image on click -->
                     <div id="tabs">
                         <h2 id="Design" data-img="assets/images/page4-1.webp"><a id="design">Design</a></h2>
                         <h2 id="Project" data-img="assets/images/page4-2.webp"><a>Project</a></h2>
                         <h2 id="Execution" data-img="assets/images/page4-3.webp"><a>Execution</a></h2>
                     </div>
+
+                    <!-- Description text that changes based on the active tab -->
                     <div id="desc">Our team works with our clients to refine an idea and concept into an executable design. We create a final design that encompasses the brand narrative to bring stories to life and provide end-to-end design solutions from concept, design, and architectural drawings to 3D renderings.
                     </div>
                 </div>
+
+                <!-- Large project photo on the right side of the black box -->
                 <img id="page4-img" src="assets/images/page4-img.webp" alt="">
             </div>
-             <div id="sec2">
-                <div id="gol"></div>
+
+            <!-- Section label with orange dot indicator -->
+            <div id="sec2">
+                <div id="gol"></div>  <!-- Small orange dot bullet -->
                 <p>WHO WE WORK WITH</p>
             </div>
+
+            <!-- ── CLIENT LOGO SWIPER SLIDER ─────────────── -->
+            <!-- Swiper.js carousel — user can drag/swipe through
+                 all the brand clients the studio has worked with -->
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
+
+                    <!-- Slide 1: Nike -->
                     <div class="swiper-slide">
                         <img src="assets/images/swippernike.svg" alt="">
                         <p>Retained Production support across retail and events in NY, CHI, LA. Creative Design, Design Management, Production/Project Management, and execution of work from concept to installation across the Country.</p>
                     </div>
+
+                    <!-- Slide 2: Converse -->
                     <div class="swiper-slide">
                         <img src="assets/images/swipperconver.svg" alt="">
                         <p>Creative Concepting, Design, Design Management, Project Management, and execution of work from concept to installation across the Country. Cross functional communication and management of third party partners.</p>
                     </div>
+
+                    <!-- Slide 3: Arc'teryx -->
                     <div class="swiper-slide">
                         <img src="assets/images/swipperarc.svg" alt="">
                         <p>Production and design along with install oversight and execution support for the SoHo store opening on Broadway St, New York. Also working on creative and production work for a new store opening in Glendale, California.</p>
                     </div>
+
+                    <!-- Slide 4: Hunter -->
                     <div class="swiper-slide">
                         <img src="assets/images/swipperhunter.svg" alt="">
-                        <p>Design and Production partner for Hunter Holiday 2022 Pop-in at Nordstrom 57th St, New York, including activations in Women’s, Men’s and Kid’s zones. Thirty-five (35) additional smaller take-downs in Nordstrom stores across the US. Concept design for Holiday boot customization events in stores across winter 2022.</p>
+                        <p>Design and Production partner for Hunter Holiday 2022 Pop-in at Nordstrom 57th St, New York, including activations in Women's, Men's and Kid's zones. Thirty-five (35) additional smaller take-downs in Nordstrom stores across the US. Concept design for Holiday boot customization events in stores across winter 2022.</p>
                     </div>
+
+                    <!-- Slide 5: MediaLink / CES -->
                     <div class="swiper-slide">
                         <img src="assets/images/swippermed.svg" alt="">
                         <p>Creative, Design, and Production Partner for 2023 CES. Scope Included creation of Branding Identity, Assets, and Digital Content, Design, Production design, Production oversight and Installation of client activations for IBM, Delta, Instacart, and more.</p>
                     </div>
+
+                    <!-- Slide 6: Afterpay / NYFW -->
                     <div class="swiper-slide">
                         <img src="assets/images/swipperimg.svg" alt="">
-                        <p>Creative, Design, and Production Partner for 2022 NY Fashion Week Pop-Up space. In Partnership with B-Reel scope including creation of Final Design, Design Assets, 3D Renders, Production design, Production/Partner oversight and creation of a two (2) story pop-up for Afterpay’s clients such as Crocs, JD Sports, Container Store, & Revolve.</p>
+                        <p>Creative, Design, and Production Partner for 2022 NY Fashion Week Pop-Up space. In Partnership with B-Reel scope including creation of Final Design, Design Assets, 3D Renders, Production design, Production/Partner oversight and creation of a two (2) story pop-up for Afterpay's clients such as Crocs, JD Sports, Container Store, &amp; Revolve.</p>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div id="page5">
 
+                </div>
+            </div><!-- end .swiper -->
+
+        </div><!-- end #page4 -->
+
+
+        <!-- ════════════════════════════════════════════════════
+             PAGE 5 — SPACER SECTION
+             This empty div gives the page extra scrollable height
+             so the footer can be revealed smoothly as you scroll
+             to the very bottom. The footer is fixed, so this
+             extra height creates the "uncover" scroll effect.
+        ════════════════════════════════════════════════════ -->
+        <div id="page5">
+            <!-- Intentionally empty — acts as a scroll spacer -->
         </div>
+
+        <!-- Second full-screen menu overlay (duplicate — may be unused) -->
         <div id="full-scr">
             <div id="full-div1">
-                
             </div>
         </div>
-    </div>
- 
+
+    </div><!-- end #main -->
+
+
+    <!-- ══════════════════════════════════════════════════════════
+         FOOTER
+         Fixed to the bottom of the viewport (position:fixed).
+         As the user scrolls past #page5, the main content slides
+         up and reveals this footer underneath — like lifting a flap.
+         Contains: nav links, email CTA, logo, copyright info.
+    ══════════════════════════════════════════════════════════ -->
     <div id="footer">
-        <div id="shape1"></div>
-        <div id="shape2"></div>
+        <!-- Animated glow blobs in the footer background -->
+        <div id="shape1"></div>  <!-- Orange blob top-left -->
+        <div id="shape2"></div>  <!-- Orange blob top-right -->
+
+        <!-- Upper footer: nav links + email sign-up CTA -->
         <div id="footerupper">
             <div>
                 <h2>Work</h2>
@@ -270,24 +439,45 @@
             </div>
             <div id="email">
                 <p>Get industry insights and creative inspiration straight to your inbox.</p>
-                <h6>Email Address</h6>
+                <h6>Email Address</h6>  <!-- Acts as a placeholder label for the email input -->
             </div>
         </div>
+
+        <!-- Lower footer: logo + copyright + social links -->
         <div id="footerlower">
+            <!-- Large footer logo -->
             <img src="https://assets-global.website-files.com/64d3dd9edfb41666c35b15b7/64d3dd9edfb41666c35b15c6_Footer%20Logo.svg" alt="">
-            
+
+            <!-- Copyright and social media info -->
             <div>
                 <h5>Copyright © Sundown Studio</h5>
                 <h5>Brooklyn, NY</h5>
                 <h5>Instagram</h5>
                 <h5>LinkedIn</h5>
             </div>
-    </div>
+        </div>
 
+    </div><!-- end #footer -->
+
+
+    <!-- ══════════════════════════════════════════════════════════
+         SCRIPTS — Loaded at the BOTTOM so the HTML is parsed first
+         before JavaScript tries to access HTML elements.
+    ══════════════════════════════════════════════════════════ -->
+
+    <!-- Lenis: smooth scrolling library -->
     <script src="https://unpkg.com/lenis@latest/dist/lenis.min.js"></script>
+
+    <!-- GSAP Core: the animation engine used to move the hover image -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- GSAP ScrollTrigger: plugin for scroll-based animations (imported but not actively used in this JS file yet) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" integrity="sha512-P2IDYZfqSwjcSjX0BKeNhwRUH8zRPGlgcWl5n6gBLzdi4Y5/0O4zaXrtO4K9TZK6Hn1BenYpKowuCavNandERg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Swiper: the slider/carousel library for the client logos section -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Our custom JavaScript for interactivity and animations -->
     <script src="assets/js/studio.js"></script>
 </body>
 </html>

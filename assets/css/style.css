@@ -1,107 +1,184 @@
+/* ============================================================
+   STYLE.CSS — Sundown Studio Landing Page Styles
+   
+   TABLE OF CONTENTS:
+   1.  Custom Fonts
+   2.  Global Reset
+   3.  Page 1 — Hero Section
+   4.  Nav Bar
+   5.  Hero Headline
+   6.  Hero Video
+   7.  Hero Animated Blob (Desktop)
+   8.  Page 2 — Marquee + About
+   9.  Page 3 — Featured Projects List
+   10. Fixed Hover Preview Image
+   11. Page 4 — Services + Client Slider
+   12. Full-Screen Menu Overlay
+   13. Footer
+   14. Loader Screen
+   15. Media Queries (Mobile ≤ 600px)
+============================================================ */
+
+
+/* ────────────────────────────────────────────────────────────
+   1. CUSTOM FONTS
+   Loads three weights of the "Neue Haas Grotesk" typeface
+   from local font files in assets/fonts/.
+   All three are registered under the same family name "neu"
+   but with different font-weight values.
+──────────────────────────────────────────────────────────── */
 @font-face {
-    font-family: neu;
+    font-family: neu;                                    /* Regular weight */
     src: url(../fonts/NHaasGroteskTXPro-55Rg.ttf);
 }
 @font-face {
     font-family: neu;
-    font-weight: 100;
+    font-weight: 100;                                    /* Medium weight (labelled as 100 here) */
     src: url(../fonts/NHaasGroteskTXPro-65Md.ttf);
 }
 @font-face {
     font-family: neu;
-    font-weight: 200;
+    font-weight: 200;                                    /* Bold weight (labelled as 200 here) */
     src: url(../fonts/NHaasGroteskTXPro-75Bd.ttf);
 }
+
+
+/* ────────────────────────────────────────────────────────────
+   2. GLOBAL RESET
+   Removes default browser spacing and sets the custom font
+   on every single element on the page (*).
+   box-sizing: border-box means padding/border is INCLUDED
+   in the element's width/height (not added on top).
+──────────────────────────────────────────────────────────── */
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family:neu;
+    font-family: neu;                                    /* Apply custom font everywhere */
 }
-html,body{
+html, body{
     height: 100%;
     width: 100%;
 }
+
+/* #main wraps all sections except the footer.
+   z-index:10 places it ABOVE the fixed footer so it
+   appears to "slide over" the footer as you scroll down. */
 #main{
     position: relative;
     z-index: 10;
 }
+
+/* The mobile menu button is hidden by default on desktop.
+   It becomes visible only on small screens (see media query). */
 #menu{
     display: none;
 }
 
 
+/* ────────────────────────────────────────────────────────────
+   3. PAGE 1 — HERO SECTION
+   Full-viewport-height landing area with a warm off-white
+   background color. Padded left/right to avoid content
+   touching the screen edges.
+──────────────────────────────────────────────────────────── */
 #page1{
-    background-color: #EFEAE3;
-   min-height:100vh;
+    background-color: #EFEAE3;      /* Warm off-white / cream color */
+    min-height: 100vh;              /* Always at least as tall as the screen */
     width: 100%;
-    position: relative;
-    padding: 0 2vw;
+    position: relative;             /* Needed so child elements can be absolutely positioned */
+    padding: 0 2vw;                 /* Small horizontal breathing room */
 }
 
+
+/* ────────────────────────────────────────────────────────────
+   4. NAV BAR
+   Horizontal strip at the top with logo on left and
+   nav links on the right. Uses flexbox to space them out.
+──────────────────────────────────────────────────────────── */
 nav{
     padding: 2vw 0vw;
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; /* Logo pushed left, nav links pushed right */
 }
+
+/* Nav links container (desktop) */
 #nav-part2{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1vw;
+    gap: 1vw;                       /* Small gap between each link pill */
 }
+
+/* Individual nav link pills — have a border, rounded like a capsule */
 #nav-part2 h4{
     padding: 10px 20px;
-    border: 1px solid #8a8a8a89;
-    border-radius: 50px;
+    border: 1px solid #8a8a8a89;    /* Semi-transparent grey border */
+    border-radius: 50px;            /* Makes it a rounded pill shape */
     font-weight: 600;
-    color: #000000bb;
-    transition: all ease 0.3s;
+    color: #000000bb;               /* Slightly transparent black */
+    transition: all ease 0.3s;      /* Smooth transition for hover effects */
     position: relative;
-    overflow: hidden;
+    overflow: hidden;               /* Clips the ::after pseudo-element fill */
 }
+
+/* 
+   NAV HOVER EFFECT:
+   A black rectangle is hidden below each nav button (bottom: -100%).
+   On hover, it slides UP to cover the button, changing its background to black.
+   This is the "fill from bottom" hover animation.
+*/
 #nav-part2 h4::after{
     content: "";
     position: absolute;
     height: 100%;
     width: 100%;
-    background-color: black;
+    background-color: black;        /* The fill color */
     left: 0;
-    bottom: -100%;
+    bottom: -100%;                  /* Starts hidden BELOW the button */
     border-radius: 50%;
     transition: all ease 0.3s;
-
 }
 
+/* On hover — slide the fill rectangle UP to cover the button */
 #nav-part2 h4:hover::after{
-    bottom: 0;
-    border-radius: 0;
+    bottom: 0;                      /* Slides to fully cover the button */
+    border-radius: 0;               /* Expands from circle to rectangle */
 }
 
+/* The actual link text — sits above the black fill using z-index */
 #nav-part2 h4 a{
     color: #000000bb;
     text-decoration: none;
     position: relative;
-    z-index: 9;
+    z-index: 9;                     /* Stays on top of the animated fill */
     font-size: 16px;
 }
 
-#nav-part2 h4:hover  a{   
+/* When the button is hovered, turn the link text WHITE (visible on black bg) */
+#nav-part2 h4:hover a{
     color: #fff;
-
 }
 
+
+/* ────────────────────────────────────────────────────────────
+   5. HERO HEADLINE AREA
+   Two-column layout at the bottom of the hero.
+   Left: tagline paragraph. Right: large bold headline.
+──────────────────────────────────────────────────────────── */
 #center{
     height: 80vh;
     width: 100%;
     display: flex;
-    align-items: flex-end;
+    align-items: flex-end;          /* Both columns sit at the BOTTOM of this area */
     justify-content: space-between;
-    border-bottom: 1px solid #0000003c;
+    border-bottom: 1px solid #0000003c;  /* Faint dividing line below hero content */
     padding-bottom: 4vw;
 }
+
+/* Left column tagline */
 #left h3{
     width: 25vw;
     text-align: left;
@@ -109,12 +186,18 @@ nav{
     line-height: 2.5vw;
 }
 
+/* Right column — gigantic headline text */
 #center h1{
-    font-size: 10vw;
+    font-size: 10vw;                /* Size relative to screen width */
     text-align: right;
     line-height: 8.5vw;
 }
 
+
+/* ────────────────────────────────────────────────────────────
+   6. HERO VIDEO
+   Full-width video below the headline, with rounded corners.
+──────────────────────────────────────────────────────────── */
 #page1 video{
     position: relative;
     border-radius: 25px;
@@ -122,19 +205,28 @@ nav{
     margin-top: 4vw;
 }
 
+
+/* ────────────────────────────────────────────────────────────
+   7. HERO ANIMATED BLOB (Desktop)
+   An orange glowing shape that sits behind the video.
+   Made up of three overlapping blurred divs that animate
+   independently to create an organic, lava-lamp effect.
+──────────────────────────────────────────────────────────── */
+
+/* Container for all three blob shapes */
 #hero-shape{
     position: absolute;
     height: 36vw;
     width: 50vw;
-    background-color: #FE320A;
+    background-color: #FE320A;      /* Orange */
     right: 0;
     top: 88vh;
-    border-bottom-left-radius: 50%;
+    border-bottom-left-radius: 50%; /* Gives the container a curved left edge */
     border-top-left-radius: 50%;
-    filter: blur(20px);
- 
+    filter: blur(20px);             /* The whole container is slightly blurred */
 }
 
+/* hero1: fills the entire container shape — the main orange mass */
 #hero1{
     position: absolute;
     height: 100%;
@@ -145,6 +237,7 @@ nav{
     filter: blur(40px);
 }
 
+/* hero2: a smaller circle that floats and drifts using anime2 animation */
 #hero2{
     position: absolute;
     height: 30vw;
@@ -156,9 +249,10 @@ nav{
     animation-duration: 3s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
-    animation-direction: alternate;
+    animation-direction: alternate;  /* Plays forward then backward endlessly */
 }
 
+/* hero3: another small circle drifting with anime1 — different path from hero2 */
 #hero3{
     position: absolute;
     height: 30vw;
@@ -173,94 +267,100 @@ nav{
     animation-direction: alternate;
 }
 
+/* anime1: drifts slightly down-left then back (used by hero3) */
 @keyframes anime1 {
-    from{
-        transform: translate(10%, -10%);
-
-    }
-    to{
-        transform: translate(-10%,10%);
-    }
-    
+    from{ transform: translate(10%, -10%); }
+    to{   transform: translate(-10%, 10%); }
 }
 
+/* anime2: drifts more aggressively down-right then back (used by hero2) */
 @keyframes anime2 {
-    from{
-        transform: translate(10%, -10%);
-
-    }
-    to{
-        transform: translate(30%,20%);
-    }
-    
+    from{ transform: translate(10%, -10%); }
+    to{   transform: translate(30%, 20%); }
 }
 
+
+/* ────────────────────────────────────────────────────────────
+   8. PAGE 2 — MARQUEE BANNER + ABOUT SECTION
+──────────────────────────────────────────────────────────── */
 #page2{
     background-color: #EFEAE3;
     min-height: 100vh;
     width: 100%;
     padding: 8.8vw 0vw;
-    position: relative;
+    position: relative;             /* Needed to position the big-gola blob absolutely */
 }
 
+/* The outer wrapper — allows horizontal scrolling (auto)
+   but hides the scrollbar so users can't manually scroll it */
 #move-text{
-    overflow-x:auto;
-    white-space: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;            /* Prevent text from wrapping to next line */
     width: 100%;
 }
 #move-text::-webkit-scrollbar{
-    display: none;
+    display: none;                  /* Hides the scrollbar in Chrome/Safari */
 }
+
+/* Each .con is one full copy of the scrolling text strip.
+   Multiple copies are needed so when one exits left, the
+   next one is already entering from the right. */
 .con{
     white-space: nowrap;
-    display: inline-block;
+    display: inline-block;          /* Sits side-by-side with other .con elements */
     animation-name: move;
     animation-duration: 8.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
+    animation-timing-function: linear;   /* Constant speed — no ease */
+    animation-iteration-count: infinite; /* Loops forever */
 }
+
+/* Giant text in the scrolling strip */
 #move-text h1{
     font-size: 8vw;
-    display: inline-block;
+    display: inline-block;          /* Sits inline so all words are on one line */
 }
+
+/* Small orange circular bullet/separator between words in the marquee */
 #gola{
     height: 60px;
     width: 60px;
     background-color: #FE320A;
-    border-radius: 50%;
-    display: inline-block;
+    border-radius: 50%;             /* Makes it a perfect circle */
+    display: inline-block;          /* Inline with the text */
     margin: 0.5vw 2vw;
 }
 
+/* The scrolling animation — moves the text strip from its starting
+   position to 100% left (completely off screen to the left).
+   Since there are 3 identical copies, the next copy seamlessly
+   enters from the right as the first exits left. */
 @keyframes move {
-    from{
-        transform: translateX(0);
-    }
-    to{
-        transform: translateX(-100%);
-    }
-    
+    from{ transform: translateX(0); }
+    to{   transform: translateX(-100%); }
 }
 
+/* ── About Section: Mission Statement + Image ── */
 #page2-bottom{
     height: 80vh;
-    padding:4vw 6vw;
+    padding: 4vw 6vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
 }
 
+/* Large mission statement text */
 #page2-bottom h1{
     position: relative;
-    z-index: 9;
+    z-index: 9;                     /* Stays above the glow blob */
     font-size: 3.9vw;
     width: 70%;
-    line-height: 4vw; 
-
+    line-height: 4vw;
 }
+
+/* Right column: team image + paragraph */
 #bottom-part2{
-    width:20vw;
+    width: 20vw;
     padding-top: 18vw;
 }
 
@@ -268,7 +368,7 @@ nav{
     height: 30vh;
     width: 100%;
     border-radius: 5%;
-    object-fit: cover;
+    object-fit: cover;              /* Crops image to fill container without distorting */
 }
 
 #bottom-part2 p{
@@ -277,15 +377,17 @@ nav{
     width: 100%;
 }
 
+/* Large animated orange glow blob behind the about text.
+   Uses a gradient and an infinite floating animation. */
 #page2 #big-gola{
     height: 35vw;
     width: 35vw;
-    position:absolute;
-    background:linear-gradient(to top, #FE330A,#ff8a31);
+    position: absolute;
+    background: linear-gradient(to top, #FE330A, #ff8a31); /* Orange gradient */
     border-radius: 50%;
     top: 55%;
     left: 24%;
-    filter: blur(25px);
+    filter: blur(25px);             /* Heavy blur = soft glow effect */
     animation-name: big-gola;
     animation-duration: 5s;
     animation-timing-function: ease-in;
@@ -293,28 +395,30 @@ nav{
     animation-direction: alternate;
 }
 
+/* Floating drift animation for the big orange glow blob */
 @keyframes big-gola {
-    from{
-        transform: translate(10% ,-10%);
-    }
-    to{
-        transform: translate(-10%, 5%);
-    }
-    
+    from{ transform: translate(10%, -10%); }
+    to{   transform: translate(-10%, 5%); }
 }
 
+
+/* ────────────────────────────────────────────────────────────
+   9. PAGE 3 — FEATURED PROJECTS LIST
+──────────────────────────────────────────────────────────── */
 #page3{
     min-height: 100vh;
     background-color: #EFEAE3;
 }
 
+/* Section label row ("FEATURED PROJECTS") with a dot indicator */
 #sec{
     display: flex;
     gap: 0.5vw;
     padding: 1vw 2vw;
     align-items: center;
-
 }
+
+/* Tiny red/orange dot used as a section label indicator */
 #gol{
     height: 8px;
     width: 8px;
@@ -322,12 +426,15 @@ nav{
     background-color: #FE330A;
 }
 
+/* Container for all project rows */
 #elem-con{
     padding: 1vw 0;
     position: relative;
     z-index: 0;
     cursor: pointer;
 }
+
+/* Individual project row */
 .elem{
     height: 6vw;
     width: 100%;
@@ -336,23 +443,26 @@ nav{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid rgb(207, 201, 201);
-    overflow: hidden;
-
+    border-bottom: 1px solid rgb(207, 201, 201); /* Thin dividing line between rows */
+    overflow: hidden;               /* Clips the #overlay so it hides above the row */
 }
 
+/* On hover, slide the orange overlay INTO VIEW from the top */
 .elem:hover #overlay{
-    top: 0%;
+    top: 0%;                        /* Slide from -100% (hidden) to 0% (fully visible) */
 }
+
+/* Orange hover fill — starts hidden ABOVE the row */
 #overlay{
     position: absolute;
     height: 100%;
     width: 100%;
-    top: -100%;
-    background-color: #FF9831;
-    transition: all ease 0.2s;
+    top: -100%;                     /* Hidden above the row at rest */
+    background-color: #FF9831;      /* Bright orange */
+    transition: all ease 0.2s;      /* Smooth 0.2s slide animation */
 }
 
+/* Inner content row: project name on left, client on right */
 #proj{
     height: 100%;
     width: 100%;
@@ -361,12 +471,16 @@ nav{
     justify-content: space-between;
     padding: 0 2vw;
 }
+
+/* Project name text — sits above the orange overlay (z-index 10) */
 #proj h2{
     position: relative;
     z-index: 10;
     font-weight: bolder;
     font-size: 3vw;
 }
+
+/* Client name + category text block on right side */
 #proj div{
     text-align: right;
     position: relative;
@@ -376,26 +490,36 @@ nav{
     font-size: 2vw;
 }
 #proj div p{
-    color: rgb(173, 167, 167);
+    color: rgb(173, 167, 167);      /* Muted grey at rest */
 }
+
+/* When row is hovered, change the category text to a darker orange */
 .elem:hover #proj div p{
     color: #B36B22;
 }
 
+
+/* ────────────────────────────────────────────────────────────
+   10. FIXED HOVER PREVIEW IMAGE
+   The image card that follows your cursor over the project list.
+   Starts hidden (display:none) and is shown by JavaScript.
+   Positioned fixed so it follows scroll independently.
+──────────────────────────────────────────────────────────── */
 #fixed-image{
     height: 30vw;
     width: 25vw;
     background-size: cover;
     background-position: center;
-    position: fixed;
-    z-index: 999;
+    position: fixed;                /* Stays on screen even as user scrolls */
+    z-index: 999;                   /* On top of everything */
     border-radius: 20px;
     top: 0;
     left: 0;
-    display: none;
-    pointer-events: none;
-    
+    display: none;                  /* Hidden until mouse enters project list */
+    pointer-events: none;           /* Mouse events pass through — won't interfere with hover */
 }
+
+/* "All Projects" button styling — same pill shape as nav links */
 #but{
     padding: 3vw 4vw;
     width: 20vw;
@@ -410,6 +534,7 @@ nav{
     position: relative;
     overflow: hidden;
 }
+/* Same "fill from bottom" hover animation as nav links */
 #navbut h4::after{
     content: "";
     position: absolute;
@@ -420,13 +545,11 @@ nav{
     bottom: -100%;
     border-radius: 50%;
     transition: all ease 0.3s;
-
 }
 #navbut h4:hover::after{
     bottom: 0;
     border-radius: 0;
 }
-
 #navbut h4 a{
     color: #000000bb;
     text-decoration: none;
@@ -434,21 +557,23 @@ nav{
     z-index: 9;
     font-size: 16px;
 }
-
-#navbut h4:hover  a{   
+#navbut h4:hover a{
     color: #fff;
-
 }
 
+
+/* ────────────────────────────────────────────────────────────
+   11. PAGE 4 — SERVICES + CLIENT SLIDER
+──────────────────────────────────────────────────────────── */
 #page4{
     min-height: 150vh;
     max-width: 100vw;
-    overflow: hidden;
+    overflow: hidden;               /* Prevents swiper from creating horizontal scrollbar */
     background-color: #EFEAE3;
     padding: 6vw 0;
-
 }
 
+/* Dark rounded card that contains the service tabs + image */
 #black-box{
     height: 110vh;
     margin: 0 2vw;
@@ -458,6 +583,7 @@ nav{
     align-items: center;
 }
 
+/* Right-side image in the black box */
 #black-box img{
     width: 50%;
     height: 100%;
@@ -465,15 +591,17 @@ nav{
     border-radius: 21px;
 }
 
+/* Service tab headers (Design / Project / Execution) */
 #tab-sec h2{
-    font-family: sun-mediu;
+    font-family: sun-mediu;         /* Note: this font isn't defined — falls back to browser default */
     font-size: 4.5vw;
     font-weight: bolder;
     position: relative;
     cursor: pointer;
-    color: #504A45;
+    color: #504A45;                 /* Dark muted warm tone */
 }
 
+/* Left border accent on the tabs column */
 #tabs{
     position: relative;
     border-left: 2px solid #504A45;
@@ -485,28 +613,33 @@ nav{
     text-decoration: none;
 }
 
+/* The "Design" tab is moved slightly to overlap the border line visually */
 #Design{
     right: 2vw;
 }
+
+/* The active "Design" link is shown in light cream color (stands out on black bg) */
 #design{
     color: #EFEAE3;
 }
 
+/* Left content area of the black box (tabs + description) */
 #black-box #tab-sec{
     color: #EFEAE3;
     display: flex;
     flex-direction: column;
     padding: 0 9vw;
     gap: 14px;
-
 }
 
- #desc{
+/* Description text below the tabs */
+#desc{
     padding: 1vw 0;
     font-size: 1.2vw;
     width: 30vw;
 }
 
+/* "WHO WE WORK WITH" section label */
 #sec2{
     display: flex;
     gap: 0.5vw;
@@ -514,6 +647,7 @@ nav{
     align-items: center;
 }
 
+/* Swiper carousel container */
 .swiper{
     height: auto;
     width: 100%;
@@ -521,67 +655,92 @@ nav{
     overflow: hidden;
     position: relative;
 }
-.swiper-slide {
-    width: 23%;
+
+/* Individual slide in the carousel */
+.swiper-slide{
+    width: 23%;                     /* Each slide takes up ~23% of the swiper width */
     height: 100%;
     display: flex;
     padding: 0 2vw;
-    flex-direction: column;
+    flex-direction: column;         /* Logo stacked above text */
     flex-shrink: 0;
-    border-left: 1px solid #b1b1b1;
+    border-left: 1px solid #b1b1b1; /* Dividing line between slides */
 }
-.swiper-slide img {
+
+/* Client logo in each slide */
+.swiper-slide img{
     width: 130px;
     margin-bottom: 2rem;
 }
+
+/* Description text in each slide */
 .swiper-slide p{
     font-size: 1vw;
     line-height: 1.4;
 }
 
-#page5 {
-    height: 100vh;
+
+/* ────────────────────────────────────────────────────────────
+   12. FULL-SCREEN MENU OVERLAY
+   Hidden above the viewport (top:-100%) at rest.
+   When the menu button is clicked, JavaScript sets top:0
+   to slide it down over the page. The CSS transition
+   handles the smooth sliding animation.
+──────────────────────────────────────────────────────────── */
+#page5{
+    height: 100vh;                  /* Spacer section — creates scroll room to reveal footer */
     width: 100%;
 }
 
-#full-scr {
+/* The overlay panel itself */
+#full-scr{
     height: 100vh;
     width: 100%;
-    background-color: #00000070;
+    background-color: #00000070;    /* Semi-transparent dark overlay */
     position: fixed;
     z-index: 99;
-    top: -100%;
-    transition: all ease 0.5s;
+    top: -100%;                     /* Starts completely above the screen */
+    transition: all ease 0.5s;      /* Smooth 0.5s slide animation */
 }
 
-#full-div1 {
+/* The white/cream box that contains the nav links (top half of overlay) */
+#full-div1{
     height: 50%;
     width: 100%;
     background-color: #EFEAE3;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-
 }
 
 
-#footer {
+/* ────────────────────────────────────────────────────────────
+   13. FOOTER
+   Fixed at the bottom of the viewport (position:fixed).
+   The page content (#main) scrolls over it, creating a
+   "reveal footer as you scroll" effect.
+   The empty #page5 section provides the extra scroll space
+   needed to fully reveal the footer.
+──────────────────────────────────────────────────────────── */
+#footer{
     position: fixed;
-    height: 130vh;
+    height: 130vh;                  /* Taller than screen so there's more to reveal */
     width: 100%;
     background-color: #000;
     color: #fff;
-    z-index: 9;
+    z-index: 9;                     /* BELOW #main (z-index:10) — hidden until scrolled to */
     bottom: 0;
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
     padding: 1vw 3vw;
 }
+
+/* Orange animated blob in footer — top-left */
 #shape1{
     height: 35vw;
     width: 60vw;
     background-color: #FE320A;
-    position:absolute;
+    position: absolute;
     top: -10%;
     left: -10%;
     filter: blur(40px);
@@ -589,48 +748,41 @@ nav{
     border-bottom-left-radius: 30%;
     animation: shapeAnime 5s linear infinite alternate;
 }
+
+/* Orange animated blob in footer — top-right */
 #shape2{
     height: 40vw;
     width: 65vw;
     background-color: #FE320A;
-    position:absolute;
+    position: absolute;
     top: -15%;
     right: -10%;
     filter: blur(50px);
     border-bottom-right-radius: 50%;
     border-bottom-left-radius: 20%;
     animation: shapeAnime2 7s linear infinite alternate;
-
 }
 
+/* shape1 animation — drifts + skews + slightly grows */
 @keyframes shapeAnime {
-    from{
-        transform: translate(0,0) skew(0) scale(1);
-    }
-    to{
-        transform: translate(-10%,10%) skew(-10deg) scale(1.1);
-    }
-    
+    from{ transform: translate(0,0) skew(0) scale(1); }
+    to{   transform: translate(-10%,10%) skew(-10deg) scale(1.1); }
 }
 
+/* shape2 animation — drifts + rotates */
 @keyframes shapeAnime2 {
-    from{
-        transform: translate(0,0) rotate(0);
-    }
-    to{
-        transform: translate(-10%,-10%) rotate(30deg);
-    }
-    
+    from{ transform: translate(0,0) rotate(0); }
+    to{   transform: translate(-10%,-10%) rotate(30deg); }
 }
 
+/* Upper footer row: nav links (left) + email signup (right) */
 #footerupper{
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     padding: 2vw 5vw;
-    z-index: 9;
+    z-index: 9;                     /* Sits above the blurred blobs */
 }
-
 #footerupper h2{
     font-size: 2vw;
     opacity: 0.8;
@@ -642,42 +794,45 @@ nav{
     opacity: 0.8;
 }
 #email h6{
-     font-size: 1.5vw;
-     font-weight: 100;
-     padding-bottom: 2.5vh;
-     border-bottom: 1px solid #504A45;
-     color: #504A45;
+    font-size: 1.5vw;
+    font-weight: 100;
+    padding-bottom: 2.5vh;
+    border-bottom: 1px solid #504A45;  /* Underline acts as an input field hint */
+    color: #504A45;
 }
 
+/* Lower footer: logo + copyright + socials */
 #footerlower{
     width: 100%;
     padding-top: 2vw;
     margin-top: 5vw;
 }
-
 #footerlower img{
-    border-bottom:1px solid #555;
+    border-bottom: 1px solid #555;
     width: 100%;
-    filter: invert(0);
-    padding-bottom:2vw;  
+    filter: invert(0);              /* Keep logo colors as-is (0 = no invert) */
+    padding-bottom: 2vw;
+}
+#footerlower div{
+    padding: 0vw 0vw;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1vh;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1vw;
+    opacity: 0.5;                   /* Subdued so they don't compete with main content */
 }
 
-#footerlower div {
-        padding: 0vw 0vw;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1vh;
-        align-items: center;
-        justify-content: space-between;
-        margin-top: 1vw;
-        opacity: 0.5;
-}
 
+/* ════════════════════════════════════════════════════════════
+   15. MEDIA QUERIES — Mobile Layout (max-width: 600px)
+   All the styles below OVERRIDE the desktop styles above
+   when the screen is 600px wide or smaller (phone-size).
+════════════════════════════════════════════════════════════ */
+@media (max-width: 600px) {
 
-
-
-    @media (max-width : 600px) {
-
+    /* ── Page 1 mobile overrides ── */
     #page1{
         min-height: 100vh;
         max-width: 100vw;
@@ -686,6 +841,10 @@ nav{
         padding: 2vw 2vw;
         background-color: #EFEAE3;
     }
+
+    /* On mobile, the full-screen menu looks different:
+       Only 40vh tall (not full screen), darker background,
+       slides down from top with rounded bottom corners */
     #full-scr{
         height: 40vh;
         width: 100%;
@@ -700,12 +859,13 @@ nav{
         border-bottom-left-radius: 30px;
         border-bottom-right-radius: 30px;
     }
-    
+
+    /* Mobile menu nav links row — horizontal at bottom of overlay */
     #full-div1{
         height: 30%;
         width: 100%;
         position: relative;
-        background-color:transparent;
+        background-color: transparent;
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
         padding-right: 20vw;
@@ -716,6 +876,8 @@ nav{
         z-index: 999;
         gap: 20px;
     }
+
+    /* Back/close button inside the mobile menu */
     #full-div1 button{
         padding: 14px 18px;
         border-radius: 50px;
@@ -727,6 +889,8 @@ nav{
         display: flex;
         align-items: center;
     }
+
+    /* Nav link text in mobile menu — uppercase, no underline */
     #full-div1 h2 a{
         text-decoration: none;
         color: #000;
@@ -734,11 +898,13 @@ nav{
         text-transform: uppercase;
         display: block;
     }
+
+    /* Gooey animated orange blob visible inside the mobile menu overlay */
     #gooey{
         position: absolute;
         height: 65vw;
         width: 90vw;
-        background:linear-gradient(to top right, #ff2d03, #ff5e0b);
+        background: linear-gradient(to top right, #ff2d03, #ff5e0b);
         border-radius: 50%;
         filter: blur(45px);
         top: -10%;
@@ -751,8 +917,9 @@ nav{
         animation-iteration-count: infinite;
         animation-direction: alternate;
         animation-timing-function: ease-in-out;
-    
     }
+
+    /* The gooey blob pulses between heavy blur and light blur */
     @keyframes gooey {
         from{
             filter: blur(30vw);
@@ -760,10 +927,11 @@ nav{
         }
         to{
             filter: blur(40px);
-            transform: translate(10% , 10%)skew(-10deg);
+            transform: translate(10%, 10%) skew(-10deg);
         }
-        
     }
+
+    /* Show the hamburger "Menu" button on mobile */
     #menu{
         display: block;
         padding: 2vw 5vw;
@@ -774,22 +942,24 @@ nav{
         font-size: 4vw;
         font-weight: 300;
     }
+
+    /* Hide the desktop nav links on mobile */
     #nav-part2{
         display: none;
     }
-    
 
+    /* Hero headline: stacks vertically on mobile */
     #center{
         display: flex;
         width: 100%;
         height: auto;
         align-items: flex-end;
         justify-content: flex-end;
-        flex-direction: column-reverse;
+        flex-direction: column-reverse; /* Right column (big text) appears first on mobile */
         border-bottom: 1px solid #BFBBB6;
         padding: 10vw 4vw;
-       
     }
+
     #left h3{
         width: 50%;
         font-size: 2.8vw;
@@ -798,6 +968,7 @@ nav{
         margin-top: 5vh;
         font-weight: 700;
     }
+
     #right{
         padding-right: 2vw;
         padding-top: 25vh;
@@ -808,6 +979,8 @@ nav{
         font-size: 9vw;
         padding-top: 10vh;
     }
+
+    /* Hero blob: smaller on mobile */
     #hero-shape{
         width: 45vw;
         height: 50vw;
@@ -815,6 +988,8 @@ nav{
         right: 0;
         top: 90vh;
     }
+
+    /* Hero video: fixed height on mobile, cropped with object-fit */
     #page1 video{
         margin-top: 6vh;
         width: 100%;
@@ -824,6 +999,8 @@ nav{
         border-radius: 12px;
         position: relative;
     }
+
+    /* Smaller orange dot bullets in the marquee on mobile */
     #gola{
         height: 4vw;
         width: 4vw;
@@ -831,17 +1008,15 @@ nav{
         background-color: #FE330A;
         display: inline-block;
         margin: 0.5vw 2vw;
-        
     }
 
-
+    /* ── Page 2 mobile overrides ── */
     #page2{
         min-height: 100vh;
         width: 100%;
         display: flex;
         flex-direction: column;
         padding: 10vh 0;
-        
     }
     #page2-bottom{
         display: flex;
@@ -849,9 +1024,7 @@ nav{
         justify-content: space-between;
         flex-direction: row;
         padding: 35vw 6vw;
-    
     }
-
     #page2-bottom h1{
         font-size: 3.5vw;
         z-index: 9;
@@ -862,8 +1035,7 @@ nav{
     }
     #bottom-part2{
         position: relative;
-        top: -25vh;
-
+        top: -25vh;                 /* Pulls image column upward for visual offset */
     }
     #bottom-part2 img{
         width: 100%;
@@ -873,10 +1045,9 @@ nav{
     }
     #bottom-part2 p{
         font-size: 2vw;
-        
     }
-    
 
+    /* ── Page 3 mobile overrides ── */
     #page3{
         min-height: 100vh;
         width: 100%;
@@ -885,11 +1056,12 @@ nav{
     #page3 #sec{
         margin-bottom: 5vh;
     }
-     #but{
+    #but{
         width: 33%;
         padding-top: 6vw;
-     }
+    }
 
+    /* ── Page 4 mobile overrides ── */
     #page4{
         width: 100%;
         min-height: 100vh;
@@ -905,9 +1077,7 @@ nav{
         flex-direction: row;
         justify-content: space-between;
         overflow: hidden;
-
     }
-
     #black-box img{
         width: 100%;
         height: 100vh;
@@ -935,7 +1105,6 @@ nav{
         padding: 4vh 7vw;
         gap: 4vh;
     }
-
     #desc{
         width: 80%;
         font-size: 2vw;
@@ -946,43 +1115,42 @@ nav{
         padding: 8vw 4vw 0;
         align-items: center;
     }
-    .swiper {
+
+    /* Swiper on mobile */
+    .swiper{
         min-height: 28vh;
         padding: 7vh 4vw;
     }
-    
-    .swiper-slide img {
+    .swiper-slide img{
         display: inline-block;
         position: relative;
         object-fit: cover;
         width: 100%;
     }
-    
-    .swiper-slide p {
+    .swiper-slide p{
         width: 100%;
         color: #2a2929f4;
         font-size: 2vh;
     }
-    
-    .swiper-slide {
-        width: 48%;
+    .swiper-slide{
+        width: 48%;                 /* Slightly wider slides on mobile (2 visible at a time) */
         padding-left: 8vw;
         padding-top: 2vh;
     }
 
-
-    #page5 {
-        height: 85vh;
+    /* ── Page 5 + Footer mobile overrides ── */
+    #page5{
+        height: 85vh;               /* Shorter spacer on mobile */
         width: 100%;
     }
     #footer{
         position: fixed;
-        height: 85vh;
+        height: 85vh;               /* Footer shorter on mobile */
         width: 100%;
         background-color: black;
         color: #EFEAE3;
         bottom: 0%;
-        z-index: -1;
+        z-index: -1;                /* Behind everything on mobile */
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -995,23 +1163,21 @@ nav{
         gap: 18vh;
         width: 100%;
     }
-    #footerupper h2 {
+    #footerupper h2{
         font-size: 3.7vh;
         line-height: 5vw;
         margin: 0;
     }
-
-     #footerupper #email {
+    #footerupper #email{
         gap: 6vh;
         width: 100%;
     }
-    #footerupper  p{
+    #footerupper p{
         font-size: 2.8vw;
         width: 100%;
         line-height: 4vw;
-
     }
-    #email h6 {
+    #email h6{
         font-size: 3vh;
         font-weight: 200;
         padding-bottom: 1vh;
@@ -1025,7 +1191,7 @@ nav{
         padding-bottom: 2vh;
         margin-bottom: 2vh;
     }
-    #footerlower div {
+    #footerlower div{
         display: flex;
         flex-wrap: wrap;
         gap: 1vh;
@@ -1034,7 +1200,9 @@ nav{
         font-size: 2.8vw;
         opacity: 1;
     }
-    #footer #shape1 {
+
+    /* Footer blob adjustments for mobile */
+    #footer #shape1{
         top: -5%;
         left: -2%;
         width: 70%;
@@ -1045,112 +1213,79 @@ nav{
         height: 70%;
         width: 70%;
     }
+
+    /* Alternative shape animations (currently unused — no element references them) */
     @keyframes shape1 {
-        from{
-            transform: rotate(-50deg);
-        }
-        to{
-            transform: rotate(-80deg);
-        }
+        from{ transform: rotate(-50deg); }
+        to{   transform: rotate(-80deg); }
     }
     @keyframes shape2 {
-        from{
-            transform: rotate(-80deg);
-        }
-        to{
-            transform: rotate(-40deg);
-        }
+        from{ transform: rotate(-80deg); }
+        to{   transform: rotate(-40deg); }
     }
 
-}
+}/* end @media (max-width: 600px) */
 
 
+/* ────────────────────────────────────────────────────────────
+   14. LOADER SCREEN
+   Full-screen black overlay that covers the page on load.
+   Three h1 words fade in one by one (staggered with
+   animation-delay), then the whole loader slides up after
+   4 seconds (controlled by setTimeout in studio.js).
+──────────────────────────────────────────────────────────── */
 #loader{
     height: 100vh;
     width: 100%;
     background-color: #000;
     position: fixed;
-    z-index: 999;
+    z-index: 999;                   /* Sits above everything — covers the whole page */
     top: 0;
-    transition: all ease 0.5s;
+    transition: all ease 0.5s;      /* Smooth slide-up when JS sets top:-100% */
     display: flex;
     align-items: center;
     justify-content: center;
-    
 }
 
+/* Each word in the loader fades in using a gradient text clip technique:
+   - text-fill-color is transparent (so the background shows through the text)
+   - background is orange→red gradient clipped to the text shape
+   - opacity animates from 0→1→0 to create the fade in/out effect */
 #loader h1{
     font-size: 6vw;
-    color:transparent;
-    background: linear-gradient(to right,orange,orangered);
-    -webkit-background-clip: text;
+    color: transparent;
+    background: linear-gradient(to right, orange, orangered);
+    -webkit-background-clip: text;  /* Clips the gradient to only show inside text (Chrome/Safari) */
     background-clip: text;
-    position: absolute;
-    opacity: 0;
+    position: absolute;             /* All three stack on top of each other */
+    opacity: 0;                     /* Starts invisible */
     animation-name: load;
     animation-duration: 1s;
-    animation-delay: 1s;
+    animation-delay: 1s;            /* First word appears at 1s */
     animation-timing-function: linear;
 }
+
+/* Second word appears 1s after first */
 #loader h1:nth-child(2){
     animation-delay: 2s;
 }
+
+/* Third word appears 1s after second */
 #loader h1:nth-child(3){
     animation-delay: 3s;
 }
 
+/* Fade in → hold visible → fade out sequence for each word */
 @keyframes load {
-
-    0%{
-        opacity: 0;
-    }
-    10%{
-        opacity: 1;
-    }
-    90%{
-        opacity: 1;
-    }
-    100%{
-        opacity: 0;
-    }
-    
+    0%{   opacity: 0; }   /* Start invisible */
+    10%{  opacity: 1; }   /* Quickly fade in */
+    90%{  opacity: 1; }   /* Stay visible for most of the duration */
+    100%{ opacity: 0; }   /* Fade out at the end */
 }
 
-@media(max-width:600px){
- #loader h1{
-    font-size: 6vw;
+/* On mobile: loader font is smaller */
+@media(max-width: 600px){
+    #loader h1{
+        font-size: 6vw;
+    }
 }
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
